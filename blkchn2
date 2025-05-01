@@ -1,0 +1,210 @@
+# Aragon Informatics - Ethical AI Toolstack
+# GitHub Project Starter Template
+
+## 📁 Directory Structure
+
+# /aragon-informatics-ethical-ai
+|-- README.md
+|-- requirements.txt
+|-- .gitignore
+|-- /legaltech_automation
+|   |-- document_classifier.py
+|   |-- docassemble_integration.md
+|-- /nonprofit_blockchain
+|   |-- grant_tracking_contract.sol
+|   |-- blockchain_dashboard.ipynb
+|-- /fairness_explainability
+|   |-- bias_analysis_fairlearn.py
+|   |-- model_explainer_shap.py
+|-- /human_centered_ux
+|   |-- model_card_generator.py
+|   |-- actionable_recourse_tool.py
+
+## 📝 README.md (starter content)
+
+"""
+# Aragon Informatics - Ethical AI Framework
+
+Welcome to Aragon Informatics' official Ethical AI development repository. This platform supports the automation of legal workflows, nonprofit transparency using blockchain, and justice-centered ML pipelines.
+
+## 🔍 Key Features
+- Legal document automation using Docassemble
+- Nonprofit fund tracking using Ethereum smart contracts
+- Bias and fairness analysis via Fairlearn and AIF360
+- Explainable AI dashboards using SHAP, Captum, and Metabase
+- Value-aligned outputs and actionable recourse models
+
+## ⚙️ Setup Instructions
+1. Clone the repo
+2. Create a virtual environment:
+   ```bash
+   python3 -m venv venv && source venv/bin/activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## 📦 Dependencies (see requirements.txt)
+- fairlearn
+- aif360
+- shap
+- captum
+- lime
+- openpyxl
+- pandas
+- web3
+- docassemble
+- streamlit (for dashboards)
+
+## 🛡️ License
+Open-source, for ethical and non-commercial use unless otherwise approved.
+"""
+
+## ✅ requirements.txt (starter)
+"""
+fairlearn==0.7.0
+aif360==0.4.0
+shap==0.41.0
+lime==0.2.0.1
+captum==0.6.0
+docassemble
+pandas
+openpyxl
+streamlit
+web3
+"""
+
+## 📥 First Commit Message
+"""
+Initial commit:
+- Project structure setup for Aragon Informatics Ethical AI Toolstack
+- Includes core modules for legal automation, nonprofit blockchain, bias mitigation, and explainability
+- Added requirements.txt and README with full tool descriptions
+"""
+
+## 🧾 Project Description for GitHub
+"""
+Aragon Informatics builds AI systems that honor ethical values, automate legal and nonprofit workflows, and ensure fairness, transparency, and human alignment. This repository is the foundation for building open-source, justice-driven AI products.
+"""
+
+## 🔧 Sample Placeholder Code: document_classifier.py
+```python
+# legaltech_automation/document_classifier.py
+# Placeholder for a simple legal document classifier
+
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+
+# Sample categories: contract, affidavit, motion, letter, complaint
+CATEGORIES = ['contract', 'affidavit', 'motion', 'letter', 'complaint']
+
+# Sample training data placeholder
+sample_docs = [
+    ("This agreement is made effective as of...", "contract"),
+    ("I, John Doe, do hereby swear...", "affidavit"),
+    ("Plaintiff hereby moves the Court...", "motion"),
+    ("Dear Sir or Madam, this letter...", "letter"),
+    ("This is a civil complaint for...", "complaint")
+]
+
+# Convert to DataFrame
+df = pd.DataFrame(sample_docs, columns=['text', 'label'])
+
+# Build pipeline
+clf = Pipeline([
+    ('tfidf', TfidfVectorizer()),
+    ('lr', LogisticRegression())
+])
+
+# Train model
+clf.fit(df['text'], df['label'])
+
+# Predict sample
+def classify_document(text):
+    return clf.predict([text])[0]
+
+# Example usage
+if __name__ == "__main__":
+    test_doc = "The parties agree as follows..."
+    print("Predicted category:", classify_document(test_doc))
+```
+
+## 🔧 Sample Placeholder Code: grant_tracking_contract.sol
+```solidity
+// nonprofit_blockchain/grant_tracking_contract.sol
+// A simple Ethereum smart contract for grant disbursement and tracking
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract GrantTracker {
+    address public admin;
+
+    struct Grant {
+        address recipient;
+        uint256 amount;
+        string purpose;
+        bool disbursed;
+    }
+
+    Grant[] public grants;
+
+    constructor() {
+        admin = msg.sender;
+    }
+
+    function addGrant(address _recipient, uint256 _amount, string memory _purpose) public {
+        require(msg.sender == admin, "Only admin can add grants");
+        grants.push(Grant(_recipient, _amount, _purpose, false));
+    }
+
+    function disburseGrant(uint256 index) public {
+        require(msg.sender == admin, "Only admin can disburse");
+        Grant storage grant = grants[index];
+        require(!grant.disbursed, "Already disbursed");
+        grant.disbursed = true;
+        payable(grant.recipient).transfer(grant.amount);
+    }
+
+    function getGrantsCount() public view returns (uint256) {
+        return grants.length;
+    }
+
+    // Allow receiving ETH
+    receive() external payable {}
+}
+```
+
+## 📊 Sample Placeholder: blockchain_dashboard.ipynb
+```python
+# nonprofit_blockchain/blockchain_dashboard.ipynb
+# Streamlit dashboard to visualize on-chain grant disbursement activity
+
+import streamlit as st
+import pandas as pd
+from web3 import Web3
+
+st.set_page_config(page_title="Grant Disbursement Dashboard", layout="wide")
+st.title("📊 Grant Disbursement Tracker")
+
+# Connect to local blockchain (e.g., Ganache or Infura)
+w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
+st.sidebar.success("Connected: " + str(w3.is_connected()))
+
+# Sample data (placeholder until contract integration)
+data = {
+    "Recipient": ["0xABC123...", "0xDEF456..."],
+    "Amount (ETH)": [2.5, 5.0],
+    "Purpose": ["Legal aid expansion", "Digital inclusion"],
+    "Disbursed": ["Yes", "No"]
+}
+df = pd.DataFrame(data)
+
+st.dataframe(df)
+st.bar_chart(df.set_index("Recipient")["Amount (ETH)"])
+```
+
+# Additional module placeholders can be added next.
