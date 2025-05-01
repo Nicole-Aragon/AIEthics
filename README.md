@@ -1,4 +1,3 @@
-# AIEthics
 # Aragon Informatics - Ethical AI Toolstack
 # GitHub Project Starter Template
 
@@ -86,7 +85,4 @@ Initial commit:
 
 ## 🧾 Project Description for GitHub
 """
-Aragon Informatics builds AI systems that honor ethical values, automate legal and nonprofit workflows, and ensure fairness, transparency, and human alignment. This repository is the foundation for building open-source, justice-driven AI products.
-"""
-
-# Additional files can be scaffolded on request.
+Aragon Informatics builds AI systems that honor ethical values, automate legal and nonprofit workflows,
